@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joke Generator</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(345deg, #f3888c, #62433b);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .joke-container {
+        display: none;
+      }
+
+      .joke {
+        font-size: 18px;
+        color: #555;
+        background: #f9f9f9;
+        border-radius: 10px;
+        padding: 15px;
+        min-height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .punchline {
+        font-size: 18px;
+        color: #222;
+        background: #ffe8a1;
+        border-radius: 10px;
+        padding: 15px;
+        min-height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      button {
+        background: #ff6f61;
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+
+      button:hover {
+        background: #e05650;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>😂 Random Joke Generator</h1>
+      <div class="joke-container">
+        <div class="joke"></div>
+        <div class="punchline"></div>
+      </div>
+      <button id="btn">Get Joke</button>
+    </div>
+
+    <script>
+      let URL = "https://official-joke-api.appspot.com/random_joke";
+      console.log(URL);
+
+      async function generateJoke() {
+        let response = await fetch(URL);
+        let data = await response.json();
+        document.querySelector(".joke").innerText = data.setup;
+        document.querySelector(".punchline").innerText = data.punchline;
+      }
+
+      document.getElementById("btn").addEventListener("click", () => {
+        document.querySelector(".joke-container").style.display = "block";
+        generateJoke();
+      });
+    </script>
+  </body>
+</html>
